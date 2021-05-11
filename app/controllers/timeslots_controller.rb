@@ -3,7 +3,7 @@ before_action :set_timeslot, only:[:show, :edit, :destroy]
     def index
         @timeslots = Timeslot.all
 
-        render json: @timeslots, include: :user       
+        render json: @timeslots, include: :user    
           
     end
 
@@ -17,10 +17,9 @@ before_action :set_timeslot, only:[:show, :edit, :destroy]
     end
 
     def create
-        
         @timeslot = Timeslot.create(timeslot_params)
         if @timeslot
-            render json: {timeslot: @timeslot, message: "Created Successfully"}
+            render json: @timeslot, include: :user
         else
             render json: {error: @timeslot.errors}
         end
